@@ -1,37 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>🌾Farmer Chatbot</title>
-  <link rel="stylesheet" href="/KisanSetu/chatbot/static/style.css" />
+    <meta charset="UTF-8">
+    <title>Multilingual Voice Chatbot</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .chat-container {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-box {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding-right: 0.5rem;
+        }
+
+        .chat-bubble {
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 0.5rem 0;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: #d1e7dd;
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .bot-message {
+            background-color: #f8d7da;
+            align-self: flex-start;
+            text-align: left;
+        }
+
+        .controls {
+            margin-top: 1rem;
+        }
+
+        label, select, textarea, button {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        button {
+            flex: 1;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-  <div class="chat-container">
-    <h1>🌾 Farmer Chatbot</h1>
-    <div id="chat-box"></div>
-    <input type="text" id="user-input" placeholder="Type your message here..." />
-    <button onclick="sendMessage()">Send</button>
-  </div>
-  <script>
-    async function sendMessage() {
-      const input = document.getElementById("user-input");
-      const message = input.value;
-      if (!message) return;
+    <h2>🌐 Multilingual Voice Chatbot</h2>
 
-      const chatBox = document.getElementById("chat-box");
-      chatBox.innerHTML += `<div class='user'>👨‍🌾 You: ${message}</div>`;
-      input.value = "";
-      chatBox.scrollTop = chatBox.scrollHeight;
-      chatBox.innerHTML += `<div class='bot'>🤖 KrishiYodha: ${data.reply}</div>`;
-      chatBox.scrollTop = chatBox.scrollHeight;
-      const response = await fetch("/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
-      const data = await response.json();
-      chatBox.innerHTML += `<div class='bot'>🤖 KrishiYodha: ${data.reply}</div>`;
-    }
-  </script>
+    <div class="chat-container">
+        <div id="chat-response" class="chat-box"></div>
+
+        <div class="controls">
+            <label for="language">🎙️ Choose Language:</label>
+            <select id="language">
+                <option value="en-US">English (US)</option>
+                <option value="as-IN">Assamese (India)</option>
+                <option value="bn-IN">Bengali (India)</option>
+                <option value="brx-IN">Bodo (India)</option>
+                <option value="doi-IN">Dogri (India)</option>
+                <option value="gu-IN">Gujarati (India)</option>
+                <option value="hi-IN">Hindi (India)</option>
+                <option value="kn-IN">Kannada (India)</option>
+                <option value="ks-IN">Kashmiri (India)</option>
+                <option value="kok-IN">Konkani (India)</option>
+                <option value="mai-IN">Maithili (India)</option>
+                <option value="ml-IN">Malayalam (India)</option>
+                <option value="mr-IN">Marathi (India)</option>
+                <option value="mni-IN">Manipuri (India)</option>
+                <option value="ne-IN">Nepali (India)</option>
+                <option value="or-IN">Odia (India)</option>
+                <option value="pa-IN">Punjabi (India)</option>
+                <option value="sa-IN">Sanskrit (India)</option>
+                <option value="sat-IN">Santali (India)</option>
+                <option value="sd-IN">Sindhi (India)</option>
+                <option value="ta-IN">Tamil (India)</option>
+                <option value="te-IN">Telugu (India)</option>
+                <option value="ur-IN">Urdu (India)</option>
+                <option value="es-ES">Spanish (Spain)</option>
+                <option value="fr-FR">French (France)</option>
+                <option value="de-DE">German</option>
+            </select>
+
+            <textarea id="message" rows="3" placeholder="Speak or type your message..."></textarea>
+
+            <div class="btn-row">
+                <button onclick="startVoiceRecognition()">🎤 Speak</button>
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const message = document.getElementById("message").value;
+            const selectedLang = document.getElementById("language").value;
+            if (!message.trim()) return;
+
+            const chatBox = document.getElementById("chat-response");
+
+            const userBubble = document.createElement("div");
+            userBubble.className = "chat-bubble user-message";
+            userBubble.textContent = "🧑 " + message;
+            chatBox.appendChild(userBubble);
+
+            document.getElementById("message").value = "";
+
+            fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message, language: selectedLang })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const botBubble = document.createElement("div");
+                botBubble.className = "chat-bubble bot-message";
+                botBubble.textContent = "🤖 ";
+                chatBox.appendChild(botBubble);
+                typeBotResponse(data.reply, botBubble, selectedLang);
+            });
+        }
+
+        function typeBotResponse(text, container, lang) {
+            let i = 0;
+            const speed = 30; // ms per character
+
+            const interval = setInterval(() => {
+                container.textContent += text.charAt(i);
+                container.scrollIntoView({ behavior: "smooth", block: "end" });
+                i++;
+                if (i >= text.length) {
+                    clearInterval(interval);
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = lang;
+                    speechSynthesis.speak(utterance);
+                }
+            }, speed);
+        }
+
+        function startVoiceRecognition() {
+            const selectedLang = document.getElementById("language").value;
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = selectedLang;
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.start();
+
+            recognition.onstart = function () {
+                document.getElementById("message").placeholder = "🎙️ Listening...";
+            };
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript;
+                document.getElementById("message").value = speechResult;
+                document.getElementById("message").placeholder = "Speak or type your message...";
+                sendMessage();
+            };
+
+            recognition.onerror = function(event) {
+                alert("Speech recognition error: " + event.error);
+                document.getElementById("message").placeholder = "Speak or type your message...";
+            };
+
+            recognition.onend = function () {
+                document.getElementById("message").placeholder = "Speak or type your message...";
+            };
+        }
+    </script>
 </body>
 </html>
