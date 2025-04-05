@@ -20,6 +20,14 @@
             margin-bottom: 1rem;
         }
 
+        #google_translate_element {
+            align-self: flex-end;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            transform: scale(0.9);
+            transform-origin: top right;
+        }
+
         .chat-container {
             background-color: #fff;
             border-radius: 12px;
@@ -103,6 +111,8 @@
 <body>
     <h2>🌐 Multilingual Voice Chatbot</h2>
 
+    <div id="google_translate_element"></div>
+
     <div class="chat-container">
         <div id="chat-response" class="chat-box"></div>
 
@@ -146,6 +156,22 @@
         </div>
     </div>
 
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,as,bn,gu,hi,kn,ml,mr,ne,or,pa,ta,te,ur,es,fr,de',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                },
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Chatbot Script -->
     <script>
         function sendMessage() {
             const message = document.getElementById("message").value;
@@ -178,7 +204,7 @@
 
         function typeBotResponse(text, container, lang) {
             let i = 0;
-            const speed = 30; // ms per character
+            const speed = 30;
 
             const interval = setInterval(() => {
                 container.textContent += text.charAt(i);
