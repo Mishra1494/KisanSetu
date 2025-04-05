@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>🌾Farmer Chatbot</title>
-  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="stylesheet" href="/KisanSetu/chatbot/static/style.css" />
 </head>
 <body>
   <div class="chat-container">
@@ -12,7 +12,6 @@
     <input type="text" id="user-input" placeholder="Type your message here..." />
     <button onclick="sendMessage()">Send</button>
   </div>
-
   <script>
     async function sendMessage() {
       const input = document.getElementById("user-input");
@@ -22,7 +21,9 @@
       const chatBox = document.getElementById("chat-box");
       chatBox.innerHTML += `<div class='user'>👨‍🌾 You: ${message}</div>`;
       input.value = "";
-
+      chatBox.scrollTop = chatBox.scrollHeight;
+      chatBox.innerHTML += `<div class='bot'>🤖 KrishiYodha: ${data.reply}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
       const response = await fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
