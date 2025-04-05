@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farmer Profile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e6f4ea, #d2f0d0);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .farmer-profile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .profile-card {
+      background: #ffffff;
+      max-width: 900px;
+      width: 90%;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    .farmer-image {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .farmer-details {
+      flex: 1;
+      padding-top: 10px;
+    }
+
+    .farmer-details h2 {
+      margin-top: 0;
+      color: #2e7d32;
+    }
+
+    .farmer-details p {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+
+    .contact-button {
+      display: inline-block;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      margin-top: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-button:hover {
+      background-color: #388e3c;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .profile-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .farmer-image {
+        width: 100%;
+        height: auto;
+      }
+
+      .farmer-details {
+        padding: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="farmer-profile">
+    <div class="profile-card">
+      <img src="/KisanSetu/views/farmer3.jpeg" alt="Farmer Image" class="farmer-image" />
+
+      <div class="farmer-details">
+        <h2>Harish Mishra</h2>
+        <p><strong>Location:</strong> Nashik, Maharashtra</p>
+        <p><strong>Experience:</strong> 12 years in organic farming</p>
+        <p><strong>Crops:</strong> Grapes, Onions, Tomatoes</p>
+        <p><strong>Contact:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> rameshpatil@krishiconnect.com</p>
+        <a href="tel:+919876543210" class="contact-button">📞 Call Now</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
