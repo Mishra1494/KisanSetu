@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Responsive Login Page</title>
+  <title>Responsive Signup Page</title>
   <style>
     * {
       box-sizing: border-box;
@@ -17,20 +17,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: url("login.png");
+      background-image: url("login.png"); /* Replace with your image */
       background-size: cover;
       background-position: center;
     }
-    .login-container {
+
+    .signup-container {
       background-color: white;
       padding: 2rem;
       border-radius: 15px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       width: 100%;
-      max-width: 400px;
+      max-width: 450px;
     }
 
-    .login-container h2 {
+    .signup-container h2 {
       text-align: center;
       margin-bottom: 1rem;
       color: #333;
@@ -85,7 +86,7 @@
       outline: none;
     }
 
-    .btn-login {
+    .btn-signup {
       width: 100%;
       padding: 0.8rem;
       background-color: green;
@@ -97,7 +98,7 @@
       transition: background-color 0.3s ease;
     }
 
-    .btn-login:hover {
+    .btn-signup:hover {
       background-color: darkgreen;
     }
 
@@ -117,7 +118,7 @@
     }
 
     @media (max-width: 480px) {
-      .login-container {
+      .signup-container {
         padding: 1.5rem;
       }
 
@@ -132,28 +133,41 @@
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Login</h2>
+  <div class="signup-container">
+    <h2>Sign Up</h2>
 
     <!-- User/Farmer Toggle -->
     <div class="role-toggle">
-      <button type="button" id="userBtn" class="active" onclick="selectRole('user')">Login as User</button>
-      <button type="button" id="farmerBtn" onclick="selectRole('farmer')">Login as Farmer</button>
+      <button type="button" id="userBtn" class="active" onclick="selectRole('user')">Sign up as User</button>
+      <button type="button" id="farmerBtn" onclick="selectRole('farmer')">Sign up as Farmer</button>
     </div>
 
     <form action="#" method="POST">
       <input type="hidden" name="role" id="roleInput" value="user" />
+      
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required/>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
       </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="username" id="email" name="username" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required/>
+        <input type="password" id="password" name="password" required />
       </div>
-      <button type="submit" class="btn-login">Login</button>
+
+      <button type="submit" class="btn-signup">Sign Up</button>
+
       <div class="bottom-text">
-        Don't have an account? <a href="/KisanSetu/views/signup.html">Register here</a>
+        Already have an account? <a href="login.html">Login here</a>
       </div>
     </form>
   </div>
