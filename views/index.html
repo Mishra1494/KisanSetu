@@ -12,6 +12,7 @@
         <div class="header-left">
         <div class="menu-toggle">&#8942;</div> <!-- Three-dot menu -->
           <div class="logo">🌿 KrishiMitra</div>
+          <div id="google_translate_element"></div> 
           
         </div>
         <nav class="nav-links">
@@ -20,14 +21,12 @@
             <li><a href="#footer-content">Contact</a></li>
             <li><a href="#products">Products</a></li>
             <li><a href="#about-section">About Us</a></li>
-            <li><a href="login.html">Disease Detection</a></li>
+            <li><a href="">Disease Detection</a></li>
             <li><a href="login.html">Login</a></li>
           </ul>
         </nav>
       </header>
       
-  
-
   <!-- Hero Section -->
   <section class="hero" id="hero">
     <div class="hero-content">
@@ -156,7 +155,6 @@
   <a href="/KisanSetu/chatbot/templates/index.html" target="_blank" class="chat-float-btn" title="Chat with us">
     💬
   </a>
-  
   <footer>
     <div class="footer-content" id="footer-content">
       <p>&copy; 2025 Farmers Market. All rights reserved.</p>
@@ -166,5 +164,40 @@
   </footer>
 
   <script src="script.js"></script>
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'en',
+                includedLanguages: 'en,as,bn,gu,hi,kn,ml,mr,ne,or,pa,ta,te,ur,es,fr,de',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            },
+            'google_translate_element'
+        );
+    }
+    function adjustNavbarPosition() {
+    const googleBanner = document.querySelector('iframe.goog-te-banner-frame');
+    const navbar = document.querySelector('nav'); // Adjust this selector to match your navbar
+
+    if (googleBanner) {
+      const bannerHeight = googleBanner.offsetHeight || 40;
+      navbar.style.top = `${bannerHeight}px`;
+    } else {
+      navbar.style.top = '0';
+    }
+  }
+
+  // Check initially and after delay (in case banner loads late)
+  window.addEventListener('load', () => {
+    adjustNavbarPosition();
+    setTimeout(adjustNavbarPosition, 1000);
+  });
+
+  // Monitor changes to the DOM in case the Google bar is added later
+  const observer = new MutationObserver(adjustNavbarPosition);
+  observer.observe(document.body, { childList: true, subtree: true });
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

@@ -9,7 +9,16 @@
     background-color: #f4fdf5;
     color: #2e7d32;
     line-height: 1.6;
+    padding-top: 110px;
   }
+  
+  #google_translate_element {
+    
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+  }
+  
   
   header {
     display: flex;
@@ -23,11 +32,17 @@
     left: 0;
     width: 100%;
     z-index: 1000;  
+    
   }
   
   .logo {
     font-size: 1.5em;
     font-weight: bold;
+  }
+  nav {
+    height: 80px; /* previously maybe 60px */
+    padding-top: 30px; /* leave space for Google Translate */
+    
   }
   
   nav ul {
@@ -40,10 +55,13 @@
     color: white;
     text-decoration: none;
     transition: 0.3s;
+    font-size: large;
+    font-weight: bold;
   }
   
   nav ul li a:hover {
     color: #c8e6c9;
+    font-size: x-large;
   }
   
   .hero {
@@ -395,7 +413,10 @@
       align-items: flex-start;
       padding: 10px 5%;
     }
-  
+    .logo {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
     nav ul {
       flex-direction: column;
       align-items: flex-start;
