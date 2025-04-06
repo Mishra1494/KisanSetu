@@ -1,0 +1,502 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  body {
+    background-color: #f4fdf5;
+    color: #2e7d32;
+    line-height: 1.6;
+    padding-top: 130px;
+  }
+  #google_translate_element {
+    
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background:rgba(0, 0, 0, 0.4);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;  
+  }
+  nav {
+    height: 100px; /* previously maybe 60px */
+    padding-top: 30px; /* leave space for Google Translate */
+    
+  }
+  
+  .logo {
+    font-size: 2.2em; /* or any size you want */
+    font-weight: bold;
+  }
+  
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  
+  .hero {
+    background-image: url("hero.jpeg"); /* Replace with your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 5%;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Optional: Add a dark overlay for better text visibility */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* You can adjust the darkness */
+    z-index: 0;
+  }
+  
+  .hero-content {
+    z-index: 1;
+    max-width: 600px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-content button {
+    padding: 12px 24px;
+    background-color: #66bb6a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .hero-content button:hover {
+    background-color: #558b2f;
+  }
+  
+  
+  .btn {
+    background: #1b5e20;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  
+  .btn:hover {
+    background: #66bb6a;
+  }
+  
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 25px 5%;
+  }
+  
+  .search-bar input {
+    width: 50%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .search-bar button {
+    background: #388e3c;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+  }
+  
+  .search-bar button:hover {
+    background: #81c784;
+  }
+  
+  section {
+    padding: 40px 5%;
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    color: #1b5e20;
+  }
+  
+  .products, .farmer-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .product, .farmer {
+    background: white;
+    padding: 15px;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    text-align: center;
+  }
+  
+  .product:hover, .farmer:hover {
+    transform: scale(1.05);
+  }
+  
+  .product img, .farmer img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .product h3, .farmer h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #2e7d32;
+  }
+  
+  .product p, .farmer p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .product button, .farmer button {
+    background: #1b5e20;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .product button:hover, .farmer button:hover {
+    background: #66bb6a;
+  }
+  
+  .how-it-works .steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2em;
+    color: #388e3c;
+  }
+  .about-section {
+    padding: 80px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .about-section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color:green;
+  }
+  
+  .website-description {
+    max-width: 800px;
+    margin: 0 auto 50px;
+    font-size: 18px;
+    color:darkgreen;
+    line-height: 1.6;
+  }
+  
+  .developer-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 25px;
+    max-width: 300px;
+    flex: 1 1 250px;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card h3 {
+    margin-bottom: 15px;
+    color:green;
+  }
+  
+  .card p {
+    font-size: 15px;
+    color: gray;
+    line-height: 1.6;
+  }
+  
+  
+  
+  .chat-float-btn {
+    position: fixed;
+    bottom: 90px; /* Higher than footer */
+    right: 25px;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 28px;
+    padding: 14px 18px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+  
+  .chat-float-btn:hover {
+    transform: scale(1.1);
+    background-color: #388e3c;
+  }
+  
+  @media (max-width: 768px) {
+    .chat-float-btn {
+      bottom: 80px;
+      right: 15px;
+      font-size: 24px;
+      padding: 12px 16px;
+    }
+  }
+  .logo {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  footer {
+    background: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 20px 5%;
+    margin-top: 40px;
+    font-size: 0.9em;
+  }
+  
+  .footer-content p {
+    margin: 5px 0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .search-bar input {
+      width: 70%;
+    }
+    .products, .farmer-list {
+      flex-direction: column;
+      align-items: center;
+    }
+    .how-it-works .steps {
+      flex-direction: column;
+    }
+  }
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px 5%;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 10px;
+    }
+  
+    .hero {
+      height: 70vh;
+      padding: 20px 5%;
+      text-align: center;
+      flex-direction: column;
+    }
+  
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+  
+    .hero-content p {
+      font-size: 1rem;
+    }
+  
+    .search-bar {
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px 5%;
+    }
+  
+    .search-bar input {
+      width: 100%;
+    }
+  
+    .products, .farmer-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .product, .farmer {
+      width: 90%;
+    }
+  
+    .how-it-works .steps {
+      flex-direction: column;
+      gap: 10px;
+      font-size: 1em;
+    }
+  
+    .developer-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card {
+      width: 90%;
+    }
+  
+    .chatbot {
+      font-size: 1.4em;
+      padding: 12px;
+    }
+  
+    .about-section h2 {
+      font-size: 28px;
+    }
+  
+    .website-description {
+      font-size: 16px;
+      padding: 0 10px;
+    }
+  }
+  
+  /* For small phones (max-width: 480px) */
+  @media (max-width: 480px) {
+    .hero-content h1 {
+      font-size: 1.5rem;
+    }
+  
+    .hero-content p {
+      font-size: 0.95rem;
+    }
+  
+    .hero-content button {
+      font-size: 0.9rem;
+      padding: 10px 20px;
+    }
+  
+    nav ul {
+      gap: 8px;
+    }
+  
+    .search-bar button {
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
+  
+    h2 {
+      font-size: 1.4em;
+    }
+  
+    .card h3 {
+      font-size: 1.1em;
+    }
+  
+    .card p {
+      font-size: 0.85em;
+    }
+  
+    footer {
+      font-size: 0.8em;
+      padding: 15px 5%;
+    }
+  }
+  .header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Three-dot menu style */
+.menu-toggle {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+  color:white;
+}
+
+/* Responsive nav */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px); /* optional: adds a nice blur effect behind */
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 999;
+  }
+
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

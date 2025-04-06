@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farmers Market</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .logo{
+      font-size: 40px;
+      font-weight: bold;
+    }
+    
+    nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+  nav ul li a:hover {
+    color: #c8e6c9;
+    font-size: x-large;
+
+  }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="menu-toggle">&#8942;</div>
+    <div class="logo">🌿 KrishiMitra</div>
+    
+  </div>
+  <nav class="nav-links">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#about-section">About Us</a></li>
+      <li><a href="http://127.0.0.1:5000">Detect Disease</a></li>
+      
+      <% if (!currentUser) { %>
+        <li><a href="/login">Login</a></li>
+      <% } else { %>
+        <li><a href="/logout">Logout</a></li>
+      <% } %>
+      <li><a href=""><div id="google_translate_element"></div></a></li>
+
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <h1>BUY FRESH FROM FARMERS, DIRECT TO YOU</h1>
+    <p>Connect with local farmers now</p>
+   
+    <% if (currentUser && currentUser.isFarmer) { %>
+      <form action="/addproduct" method="get">
+        <button>Add Products</button>
+      </form>
+    <% } %>
+  </div>
+</section>
+
+<!-- Search Bar -->
+ <form action="/search" method="post">
+<div class="search-bar">
+  <input type="text" name="searchQuery" placeholder="Search for products..." />
+  <button>Search</button>
+</div>
+</form>
+
+<!-- ✅ Popular Products (Dynamic) -->
+<section class="popular-products" id="products">
+  <h2>Popular Products</h2>
+  <div class="products">
+    <% if (products.length === 0) { %>
+      <p>No products available right now.</p>
+    <% } else { %>
+      <% products.forEach(product => { %>
+        <div class="product">
+          <% if (product.image && product.image.url) { %>
+            <img src="<%= product.image.url %>" alt="<%= product.name %>">
+          <% } else { %>
+            <img src="/placeholder.jpg" alt="Product image">
+          <% } %>
+          <h3><%= product.name %></h3>
+          <a href="/product/<%= product._id%>">
+            <button>Contact Farmer</button>
+          </a>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</section>
+
+<!-- ✅ Meet Farmers (Dynamic) -->
+<section class="farmers">
+  <h2>Meet Our Farmers</h2>
+  <div class="farmer-list">
+    <% if (farmer.length === 0) { %>
+      <p>No farmers found right now.</p>
+    <% } else { %>
+      <% farmer.forEach(f => { %>
+        <div class="farmer">
+          <% if (f.image && f.image.url) { %>
+            <img src="<%= f.image.url %>" alt="<%= f.name %>" />
+          <% } else { %>
+            <img src="/placeholder.jpg" alt="Farmer image" />
+          <% } %>
+          <h3><%= f.Name %></h3>
+          
+          <a href="/farmer/<%= f._id %>">
+            <button>Contact</button>
+          </a>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</section>
+
+<!-- About Us -->
+<section id="about-section" class="about-section">
+  <h2>About Us</h2>
+  <p class="website-description">
+    <strong>KrishiMitra</strong> is a platform that bridges the gap between farmers and buyers by enabling direct communication and transactions—without any third-party involvement. Our mission is to empower farmers and ensure customer satisfaction by simplifying agricultural trade.
+  </p>
+
+  <div class="developer-cards">
+    <div class="card">
+      <h3>Ashwini Marathe</h3>
+      <p>Frontend developer passionate about IoT and smart tech innovation. Handles frontend of the website and design.</p>
+    </div>
+    <div class="card">
+      <h3>Raunak Mishra</h3>
+      <p>Full-stack developer managing backend systems, database, and Firebase integration.</p>
+    </div>
+    <div class="card">
+      <h3>Kartik Kumbhar</h3>
+      <p>AI developer focused on Machine Learning and mobile integration in the project.</p>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works">
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div class="step">Browse Products</div>
+    <div class="arrow">→</div>
+    <div class="step">Contact Farmer</div>
+    <div class="arrow">→</div>
+    <div class="step">Buy & Receive</div>
+  </div>
+</section>
+
+<!-- Chatbot -->
+<a href="http://127.0.0.1:5001" target="_blank" class="chat-float-btn" title="Chat with us">
+  💬
+</a>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content" id="footer-content">
+    <p>&copy; 2025 Farmers Market. All rights reserved.</p>
+    <p>Contact Us: 📞 +91 98765 43210 | ✉️ support@farmersmarket.com</p>
+    <p>📍 Pune, Maharashtra, India</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<!-- Google Translate Script -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+          {
+              pageLanguage: 'en',
+              includedLanguages: 'en,as,bn,gu,hi,kn,ml,mr,ne,or,pa,ta,te,ur,es,fr,de',
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          },
+          'google_translate_element'
+      );
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>

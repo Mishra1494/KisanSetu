@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= farmer.Name %> - Farmer Details</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Same CSS as before */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .farmer-info {
+      text-align: center;
+    }
+    .farmer-info img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+    .farmer-info h2 {
+      margin: 10px 0;
+      color: #2e7d32;
+    }
+    .product-section {
+      margin-top: 40px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 10px;
+      text-align: center;
+    }
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .product-card h3 {
+      margin: 10px 0 5px;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #2e7d32;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    .back-button:hover {
+      background-color: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="farmer-info">
+      <% if (farmer.image && farmer.image.url) { %>
+        <img src="<%= farmer.image.url %>" alt="<%= farmer.Name %>">
+      <% } else { %>
+        <img src="/default-farmer.jpg" alt="Farmer">
+      <% } %>
+      <h2><%= farmer.Name %></h2>
+      <p><strong>Email:</strong> <%= farmer.email %></p>
+    </div>
+
+    <div class="product-section">
+      <h2>Products by <%= farmer.Name %></h2>
+      <% if (farmer.product && farmer.product.length > 0) { %>
+        <div class="product-grid">
+          <% farmer.product.forEach(product => { %>
+            <div class="product-card">
+              <% if (product.image && product.image.url) { %>
+                <img src="<%= product.image.url %>" alt="<%= product.name %>">
+              <% } else { %>
+                <img src="/default-product.jpg" alt="Product">
+              <% } %>
+              <h3><%= product.name %></h3>
+              <p><strong>Price:</strong> ₹<%= product.price %></p>
+              <p><strong>Quantity:</strong> <%= product.quantity %> kg</p>
+              <p><%= product.description %></p>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p>This farmer hasn't uploaded any products yet.</p>
+      <% } %>
+    </div>
+
+    <a class="back-button" href="/">← Back to Home</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Place Order - <%= product.name %></title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f2f2f2;
+      padding: 30px;
+    }
+
+    .order-form-container {
+      max-width: 500px;
+      background-color: #fff;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      color: #34495e;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    input[readonly] {
+      background-color: #f0f0f0;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+
+    @media (max-width: 600px) {
+      .order-form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="order-form-container">
+    <h2>Place Order</h2>
+    <form action="/order/<%= product._id %>" method="POST">
+      <label>Product Name</label>
+      <input type="text" value="<%= product.name %>" readonly />
+
+      <label for="quantity">Quantity (in Kg)</label>
+      <input type="number" name="quantity" id="quantity" min="1" required oninput="calculateTotal()" />
+
+      <label>Total Price (₹)</label>
+      <input type="text" id="total" readonly />
+
+      <button type="submit">Confirm and Pay</button>
+    </form>
+  </div>
+
+  <script>
+    const pricePerKg = <%= product.price %>;
+
+    function calculateTotal() {
+      const qty = document.getElementById('quantity').value;
+      const totalField = document.getElementById('total');
+
+      const total = qty * pricePerKg;
+      if (!isNaN(total)) {
+        totalField.value = total.toFixed(2);
+      } else {
+        totalField.value = '';
+      }
+    }
+  </script>
+
+</body>
+</html>
